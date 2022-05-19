@@ -1,0 +1,21 @@
+service: generate-pdf
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: live
+  region: us-east-2
+  apiGateway:
+    binaryMediaTypes:
+      - 'application/pdf'
+      - '*/*'
+
+functions:
+  generate-pdf:
+    handler: index.handler
+    name: generate-pdf
+    timeout: 60
+    events:
+      - http:
+          path: /generate-pdf
+          method: get

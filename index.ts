@@ -89,7 +89,35 @@ const configuration = {
 //   configurations: [configuration, configuration],
 // }, true).then((pdf) => savePdfAsFile(pdf, `${__dirname}/outputs/example3.pdf`));
 
-generatePdf({
-  coverPage,
-  configurations: [configuration, configuration, configuration, configuration],
-}, true).then((pdf) => savePdfAsFile(pdf, `${__dirname}/outputs/example.pdf`));
+// generatePdf({
+//   coverPage,
+//   configurations: [configuration, configuration, configuration, configuration],
+// }, true).then((pdf) => savePdfAsFile(pdf, `${__dirname}/outputs/example.pdf`));
+
+exports.handler = async (event, context, callback) => {
+  const pdf = await generatePdf({
+    coverPage,
+    configurations: [configuration],
+  }, true);
+  const base64PDF = await convertPdfToBase64(pdf);
+  // const response = {
+  //   statusCode: 200,
+  //   body: base64PDF,
+  // };
+  // const buffer = Buffer.from(base64PDF, 'base64');
+  // fs.writeFileSync(`${__dirname}/outputs/exampleBase64.pdf`, buffer, 'utf-8')
+  let response = {
+    statusCode: 200,
+    headers: {
+      'Content-type': 'application/pdf',
+      'content-disposition': 'attachment; filename=test.pdf'
+    },
+    // body: buffer.toString('base64'),
+    body: base64PDF,
+    isBase64Encoded: true,
+  };
+  return callback(null, response);
+  // return response;
+  // const response = "Test";
+  // return response;
+};
