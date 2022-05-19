@@ -1,0 +1,8 @@
+<Document>
+  {{#if coverPage}}
+    {{> cover coverPage}}
+  {{/if}}
+  {{#each configurations}}
+    {{> configurationDetails}}
+  {{/each}}
+</Document>

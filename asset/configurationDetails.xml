@@ -1,0 +1,52 @@
+<Page size="A4">
+<View className="root">
+  <Composition style="width: 100%; height: 64.5vw; position: relative;" scale="2.5" quality="95">
+    <Image source="{{snapshot}}" className="snapshotImg" ></Image>
+  </Composition>
+  <View className="logo">
+    {{> mewaLogo}}
+  </View>
+  <View className="details">
+        <Text className="configurationName title">{{title}}</Text>
+          <View className="configurationItems">
+            {{#each articles}}
+              <View className="configurationItem">
+                  <Text className="configurationItemName subtitle">{{name}}</Text>
+                  <View className="configurationItemContent">
+                      <View className="column notLastColumn">
+                          <View className="cell"><Text className="mediumText">{{../texts.color}}</Text></View>
+                          <View className="cell nextCell"><Text className="mediumText">{{../texts.material}}</Text></View>
+                          <View className="cell nextCell"><Text className="mediumText">{{../texts.weight}}</Text></View>
+                          <View className="cell nextCell"><Text className="mediumText">{{../texts.articleNo}}</Text></View>
+                      </View>
+                      <View className="column">
+                          <View className="configurationItemValue cell">
+                              <Text className="smallText">{{color}}</Text>
+                          </View>
+                          <View className="configurationItemValue cell nextCell">
+                              <Text className="smallText">{{fabric}}</Text>
+                          </View>
+                          <View className="configurationItemValue cell nextCell">
+                              <Text className="smallText">{{weight}}</Text>
+                          </View>
+                          <View className="configurationItemValue cell nextCell">
+                              <Text className="smallText">{{articleNo}}</Text>
+                          </View>
+                      </View>
+                  </View>
+              </View>
+              {{/each}}
+              {{#if note}}
+              <View className="configurationItem">
+                  <Text className="configurationItemName subtitle">{{texts.note}}</Text>
+                  <View className="configurationItemContent">
+                      <View className="configurationNote">
+                          <Text className="smallText">{{note}}</Text>
+                      </View>
+                  </View>
+              </View>
+              {{/if}}
+          </View>
+      </View>
+    </View>
+</Page>

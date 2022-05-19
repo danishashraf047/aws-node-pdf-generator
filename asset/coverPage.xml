@@ -1,0 +1,43 @@
+<Page size="A4">
+  <View className="root">
+    <Composition style="width: 100%; height: 100%; position: relative;" scale="2.5" quality="95">
+      {{#if background}}
+      <Image className="background" source="{{background}}"></Image>
+      {{/if}}
+      {{#if logo}}
+      <View className="customLogo">
+        <Image className="logoImage" source="{{logo}}"></Image>
+      </View>
+      {{/if}}
+      {{#each (revert configurations)}}
+      {{#if (eq this.gender 'male')}}
+      <Image style="
+        position: absolute;
+        left: {{eval '-23 + (var2 - 1) * 80 / (var2 + 1) - (var2 - var1 - 1) * (30 - var2 * 2 - (var2 - var1 - 1) * 1.5)' @index ../configurations.length}}vw;
+        bottom: {{eval '-55 - (var2 - var1 - 1) * (4.5 - var2 * 1.5) + (var2 - 1) * 9'  @index ../configurations.length}}vw;
+        width: {{eval '150 - (var2 - var1 - 1)*11 - (var2 - 1)*9vw' @index ../configurations.length}}vw;
+        height: auto;
+      " source="{{this.image}}"></Image>
+      {{/if}}
+      {{#if (eq this.gender 'female')}}
+      <Image style="
+        position: absolute;
+        width: {{eval '160 - (var2 - var1 - 1)*12.5 - (var2 - 1)*9' @index ../configurations.length}}vw;
+        height: auto;
+        bottom: {{eval '-55 - (var2 - var1 - 1) * (4.5 - var2 * 1.5) + (var2 - 1) * 9' @index ../configurations.length}}vw;
+        left: {{eval '-30 + (var2 - 1) * 80 / (var2 + 1) - (var2 - var1 - 1) * (29 - var2 * 2 - (var2 - var1 - 1) * 1.5)' @index ../configurations.length}}vw;
+      " source="{{this.image}}"></Image>
+      {{/if}}
+      {{/each}}
+      <Image source="{{> marginImage}}" className="margin"></Image>
+    </Composition>
+    <View className="header">
+      <View className="headerContent">
+        {{> headerPolygon}}
+        <View className="coverTitle"><Text className="coverTitleText">{{title}}</Text></View>
+        <View className="coverSubtitle"><Text className="coverSubtitleText">{{subtitle}}</Text></View>
+        <View className="coverDate"><Text className="coverDateText">Stand {{date}}</Text></View>
+      </View>
+    </View>
+  </View>
+</Page>
